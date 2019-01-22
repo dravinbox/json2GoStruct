@@ -1,0 +1,24 @@
+<div>
+    <h1>JSON convert to Go Struct</h1>
+    <div>
+        <form action="/convert_form_action" method="post" >
+            <div>
+               <label>Name:</label><input name="MainName" value="{{.MainName}}"/>
+            </div>
+            <div>
+                <label>json:</label><textarea name="JsonStr" style="width: 400px;height: 150px;">{{.JsonStr}}</textarea>
+
+            </div>
+            <div>
+
+                <label>out:</label><textarea name="GoStruct" style="width: 400px;height: 350px;">{{.GoStruct}}</textarea>
+
+            </div>
+            <div>
+                <input type="submit" value="Send data">
+
+            </div>
+
+        </form>
+    </div>
+</div>

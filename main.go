@@ -2,36 +2,23 @@ package main
 
 import (
 	"flag"
-	"fmt"
-	"github.com/dravinbox/json2GoStruct/controller"
-	"github.com/dravinbox/json2GoStruct/util"
+	. "github.com/dravinbox/json2GoStruct/controller"
+	"github.com/kataras/iris"
+	"github.com/kataras/iris/context"
 )
 
 var (
- json = flag.String("json","{}","input json string")
-
+	json = flag.String("json", "{}", "input json string")
 )
 
-
-
-
-
 func main() {
-
-	//var str ="{\"user_name\":\"zry\",\"age\":18,\"profile\":{\"color\":\"red\",\"size\":12},\"tel\":[],\"address\":[{\"city\":\"Guangzhou\",\"province\":\"Guangdong\"}]}"
-	flag.Parse()
-
-	//fmt.Println(*json)
-	jsonMap, e := util.Json2Map(*json)
-	//jsonMap, e := util.Json2Map(str)
-
-	if e !=nil {
-		fmt.Println(e)
-		return
-	}
-
-	controller.Convert(jsonMap,"A")
+	app := iris.New()
+	app.RegisterView(iris.HTML("./view", ".html"))
+	app.Get("/", func(context context.Context) {
+		//context.JSON(Address{"guangdong","guangdong"})
+		context.View("index.html" )
+	})
+	app.Post("/convert_form_action",ConvertAction)
+	app.Run(iris.Addr(":8080"))
 
 }
-
-
