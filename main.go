@@ -13,7 +13,7 @@ var (
 
 func main() {
 	app := iris.New()
-	app.RegisterView(iris.HTML("./view", ".html"))
+	app.RegisterView(iris.HTML("view", ".html"))
 	app.Get("/", func(context context.Context) {
 		//context.JSON(Address{"guangdong","guangdong"})
 		context.View("index.html" )
