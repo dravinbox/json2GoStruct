@@ -2,7 +2,7 @@ package main
 
 import (
 	"flag"
-	. "github.com/dravinbox/json2GoStruct/controller"
+	. "json2GoStruct/controller"
 	"github.com/kataras/iris"
 	"github.com/kataras/iris/context"
 )

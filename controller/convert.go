@@ -2,8 +2,8 @@ package controller
 
 import (
 	"fmt"
-	. "github.com/dravinbox/json2GoStruct/model"
-	. "github.com/dravinbox/json2GoStruct/util"
+	. "json2GoStruct/model"
+	. "json2GoStruct/util"
 	"github.com/kataras/iris"
 	"reflect"
 	"strings"
