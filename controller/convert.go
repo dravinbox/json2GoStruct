@@ -2,8 +2,8 @@ package controller
 
 import (
 	"fmt"
-	. "json2GoStruct/model"
-	. "json2GoStruct/util"
+	. "github.com/dravinbox/json2GoStruct/model"
+	. "github.com/dravinbox/json2GoStruct/util"
 	"github.com/kataras/iris"
 	"reflect"
 	"strings"
@@ -17,14 +17,7 @@ func ConvertAction(ctx iris.Context)  {
 		ctx.WriteString(err.Error())
 	}
 
-	jsonMap, e := Json2Map(jsondata.JsonStr)
-
-	if e != nil {
-		fmt.Println(e)
-		return
-	}
-
-	jsondata.GoStruct = Handle(jsonMap, jsondata.MainName)
+	jsondata.GoStruct = Json2StructString(jsondata.JsonStr,jsondata.MainName)
 
 	ctx.View("index.html",jsondata)
 
@@ -32,18 +25,27 @@ func ConvertAction(ctx iris.Context)  {
 
 
 
-func Handle(jsonMap map[string]interface{},structName string) string {
+
+/**
+把json 字符串转化为go struct 的字符串
+ */
+func Json2StructString(json string,structName string) (structString string){
+	jsonMap, e := Json2Map(json)
+
+	if e != nil {
+		fmt.Println(e)
+		return
+	}
+
 	var goStruct []string
 	Convert(jsonMap,structName,&goStruct)
-	result := strings.Join(goStruct,"\n")
-	//fmt.Println(result)
-	return result
-
-
+	structString = strings.Join(goStruct,"\n")
+	return
 
 }
+
 /**
-递归分析map中是否含有(map[string]interface{},[]interfae{])类型，有就转化为JsonObject
+递归分析map中是否含有(map[string]interface{},[]interface{})类型，有就转化为JsonObject
 */
 func Convert(jsonMap map[string]interface{}, structName string,goStruct *[]string) {
 	// 遍历map
