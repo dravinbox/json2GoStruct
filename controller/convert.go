@@ -30,6 +30,7 @@ func ConvertAction(ctx iris.Context)  {
 把json 字符串转化为go struct 的字符串
  */
 func Json2StructString(json string,structName string) (structString string){
+	structName = StrFirstToUpper(structName)
 	jsonMap, e := Json2Map(json)
 
 	if e != nil {
